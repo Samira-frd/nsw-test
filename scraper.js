@@ -4,7 +4,7 @@ const { sendNotification } = require('./services/emailService');
 
 async function scrapeStopWorkOrders() {
   
-  
+  // run chrome in the background
   const browser = await puppeteer.launch({
     executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     headless: true
@@ -37,7 +37,7 @@ async function scrapeStopWorkOrders() {
   });
 
   await browser.close();
-  // console.log(data);
+  // data received and sent to database and processing mail 
   data.forEach(entry => {
     db.get(`SELECT * FROM stop_orders WHERE detailLink = ?`, [entry.detailLink], (err, row) => {
       if (err) return console.error(err);

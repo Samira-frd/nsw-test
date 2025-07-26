@@ -2,6 +2,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
+// gmail configuration and login 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -9,6 +10,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   }
 });
+
+// email body is generated
 
 /**
  * Send an email notification when a new stop work order is found
@@ -37,9 +40,9 @@ Link: https://www.nsw.gov.au${entry.detailLink}
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`✅ Email sent for: ${entry.title}`);
+    console.log(`Email sent for: ${entry.title}`);
   } catch (error) {
-    console.error(`❌ Failed to send email for: ${entry.title}`, error);
+    console.error(`Failed to send email for: ${entry.title}`, error);
   }
 }
 
